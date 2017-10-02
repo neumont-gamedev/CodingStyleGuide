@@ -127,10 +127,10 @@ Functions should be small and do only one thing. If the function is long or does
 ### Bracing
 Each company and developer has their own style when it comes to the placing of braces. The objective of this guide is to have a consistent style that will be familiar to all readers.
 *	All braces should exist on their own line
-  *	If (isActive)
-{
-	return;
-}
+  *	If (isActive) </br>
+{ </br>
+	return; </br>
+} </br>
 
 
 ## .h / .cpp Files
