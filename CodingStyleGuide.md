@@ -40,96 +40,96 @@ The naming of functions, classes and variables is very important. The name shoul
 
 ### Functions
 
-*	Functions should be in the form of verb or verb/noun
-*	Function names should use pascal case which is uppercase start and uppercase for each word in the name.
-  *	GetScore, SetPlayerName
-*	Avoid verbs that are ambiguous (Handle, Process,…)
-*	Functions that return a Boolean value should ask a true/false question
-  *	bool IsVisible()
+* Functions should be in the form of verb or verb/noun
+* Function names should use pascal case which is uppercase start and uppercase for each word in the name.
+  * GetScore, SetPlayerName
+* Avoid verbs that are ambiguous (Handle, Process,…)
+* Functions that return a Boolean value should ask a true/false question
+  * bool IsVisible()
 
 ### Classes/Structs
-*	Class/Struct names should be in the form of a noun
-*	Class/Struct names should use pascal case which is uppercase start and uppercase for each word in the name.
-  *	GamePlayer, AudioManager, EnemyWeapon, VertexFormat
+* Class/Struct names should be in the form of a noun
+* Class/Struct names should use pascal case which is uppercase start and uppercase for each word in the name.
+  * GamePlayer, AudioManager, EnemyWeapon, VertexFormat
 
 ### Enum
-*	Enum should be prefixed with an ‘e’
-  *	enum eState
-  *	enum eVertexFormat
-*	Values declared in the enum should be all capitals with an underscore between names
-  *	ACTIVE, LASER_WEAPON
+* Enum should be prefixed with an ‘e’
+  * enum eState
+  * enum eVertexFormat
+* Values declared in the enum should be all capitals with an underscore between names
+  * ACTIVE, LASER_WEAPON
 
 ### Macros
-*	Macros should be all capitals with an underscore between names
-  *	#define PACK_RGB(r, g, b)
+* Macros should be all capitals with an underscore between names
+  * #define PACK_RGB(r, g, b)
 
 ## Comments
 Comments are important to help the reader understand the code if it is complex or needs extra information to use. Comments tend to diverge from the original code because the comment is not updated when the code is changed. Therefore, it is vital that the code should be self-explanatory.
-*	Use // for descriptive comments and /* to disable code
-*	Do not leave old disabled code in the source
-  *	Code that is disabled makes it harder to remember why it was commented out in the first place
-  *	With source control disabled code can be found in the history of the file
-*	Write self-documenting code
-  *	playerHealth = playerHealth – damage;
-*	Do not comment bad code. Take the time to correct the code
-  *	// this is totally messed up but it works most of the time - fix me 
+* Use // for descriptive comments and /* to disable code
+* Do not leave old disabled code in the source
+  * Code that is disabled makes it harder to remember why it was commented out in the first place
+  * With source control disabled code can be found in the history of the file
+* Write self-documenting code
+  * playerHealth = playerHealth – damage;
+* Do not comment bad code. Take the time to correct the code
+  * // this is totally messed up but it works most of the time - fix me 
 
 ## Structs / Class
 Use structs for passive objects that carry data. Do not have structs that contain function methods.
 
 ## Variables
 
-*	Avoid global variables
-*	Avoid variables in the global namespace
-  *	Use a namespace to contain a variable
-  *	Do not pollute the global namespace with variables
+* Avoid global variables
+* Avoid variables in the global namespace
+  * Use a namespace to contain a variable
+  * Do not pollute the global namespace with variables
 
 ## Functions
 Functions should be small and do only one thing. If the function is long or does multiple actions, break the function into smaller functions. Keep them short and simple.
 
-*	Avoid functions in the global namespace
-  *	Use a namespace to encapsulate a function
-  *	Do not pollute the global namespace with functions
-*	The order of parameters to a function should be: inputs then outputs
-  *	Some parameters may be considered as both input and output
-  *	You may have to bend this rule
-*	Avoid have long parameter lists
-  *	Consider grouping the data in a struct if there is multiple related data
-*	Pass large data to a function as a reference unless a null pointer is possible
-  *	void DamageGameObject(GameObject& gameObject, Weapon& weapon);
-*	Strive to use the const keyword when applicable
-  *	If a method does not modify the object use const
-    *	float GetHealth() const { return m_health; }
-  *	If a function parameter is not altered in the function use const
-    *	bool IsPlayerAlive(const Player& player) { return player.GetHealth() <= 0.0f; }
+* Avoid functions in the global namespace
+  * Use a namespace to encapsulate a function
+  * Do not pollute the global namespace with functions
+* The order of parameters to a function should be: inputs then outputs
+  * Some parameters may be considered as both input and output
+  * You may have to bend this rule
+* Avoid have long parameter lists
+  * Consider grouping the data in a struct if there is multiple related data
+* Pass large data to a function as a reference unless a null pointer is possible
+  * void DamageGameObject(GameObject& gameObject, Weapon& weapon);
+* Strive to use the const keyword when applicable
+  * If a method does not modify the object use const
+    * float GetHealth() const { return m_health; }
+  * If a function parameter is not altered in the function use const
+    * bool IsPlayerAlive(const Player& player) { return player.GetHealth() <= 0.0f; }
 
 ## Spacing/Indentation/Bracing
 
 ### Spacing
 
-*	Put a space between if, for, while and the parenthesis that follows.
-  *	If (x >= 5.0f)
-  *	for (int I = I < 5; i++)
-*	Do not put a space between the function name and the parenthesis in a function call.
-  *	void CreateEnemy(); 
-*	Do not put spaces inside parenthesis.
-*	Put spaces after commas, do not put spaces before commas.
-  *	GetGameObjectType(objects, eType.ENEMY, true);
-*	Place the pointer and reference symbol with the type and not the variable
-  *	GamePlayer* player;
-  *	bool IsEnemyInRange(const Enemy& enemy, float distance);
+* Put a space between if, for, while and the parenthesis that follows.
+  * If (x >= 5.0f)
+  * for (int I = I < 5; i++)
+* Do not put a space between the function name and the parenthesis in a function call.
+  * void CreateEnemy(); 
+* Do not put spaces inside parenthesis.
+* Put spaces after commas, do not put spaces before commas.
+  * GetGameObjectType(objects, eType.ENEMY, true);
+* Place the pointer and reference symbol with the type and not the variable
+  * GamePlayer* player;
+  * bool IsEnemyInRange(const Enemy& enemy, float distance);
 
 ### Indentation
 
-*	Use tabs not spaces
-  *	Use tabs that are equal to 4 spaces
+* Use tabs not spaces
+  * Use tabs that are equal to 4 spaces
 
 ### Bracing
 Each company and developer has their own style when it comes to the placing of braces. The objective of this guide is to have a consistent style that will be familiar to all readers.
-*	All braces should exist on their own line
-  *	If (isActive) </br>
+* All braces should exist on their own line
+  * If (isActive) </br>
 { </br>
-	return; </br>
+	    return; </br>
 } </br>
 
 
@@ -137,14 +137,14 @@ Each company and developer has their own style when it comes to the placing of b
 ### .h
 Header files can become tricky and result in a tangled mess of errors resulting from .h files with circular dependencies. Following the guidelines below will help manage the header dependencies.
 
-*	Use #pragma once at the top of the file, do not use include guard #ifndef/#define/#endif
-  *	All modern compilers support #pragma once 
-*	Use forward declarations when possible
-  *	Avoid using #include in a header file that is not required
-*	Avoid function implementations in header files, prefer headers with declarations only
-*	Avoid having multiple classes in the same header unless they are nested in another class or short classes
-*	Include third party headers with #include <name>
-  *	Third party header locations should be provided through the build script
+* Use #pragma once at the top of the file, do not use include guard #ifndef/#define/#endif
+  * All modern compilers support #pragma once 
+* Use forward declarations when possible
+  * Avoid using #include in a header file that is not required
+* Avoid function implementations in header files, prefer headers with declarations only
+* Avoid having multiple classes in the same header unless they are nested in another class or short classes
+* Include third party headers with #include <name>
+  * Third party header locations should be provided through the build script
 
 ### .cpp
 Classes should not be split across multiple .cpp files.
@@ -154,8 +154,8 @@ It is the intent of this document to come up with a good standard that is follow
 
 **CLARITY IS KING!**
 
-*	Do not try to write complex code, simplicity is best
-*	The point of good code is to be clear not clever
+* Do not try to write complex code, simplicity is best
+* The point of good code is to be clear not clever
 
 Much of this document was created from personal experience and from the references listed below. It is the hope that this guide follows many of the same standards that are used in the industry today.
 
