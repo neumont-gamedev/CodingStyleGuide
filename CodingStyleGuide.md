@@ -1,5 +1,7 @@
+<p align="center">
 # Neumont College Game Studios
 # C++ Coding Style Guideline
+</p>
 
 These coding guidelines focus on the C++- language and act as a general guide for other coding languages that are used at the studio.
 
