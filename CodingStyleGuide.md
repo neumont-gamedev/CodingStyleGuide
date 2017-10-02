@@ -12,31 +12,31 @@ Some of style choices made are well motivated and common to many companies while
 
 The naming of functions, classes and variables is very important. The name should be clear and concise. Code is reading/writing is general done on a 10:1 ratio. So, making the code easy to read is vital.
 
-*	The bigger the scope of the name the more descriptive it should be.
-  *	Using common letters for small loops is ok (I, j, k, …)
-*	Do not use cryptic names or abbreviations
-*	Use correct American English spelling
-*	Make names pronounceable
-*	Use names that are searchable
-*	Use complement names and be consistent with their usage
-  *	If you use Start/Stop in your code then use those names throughout, do not use Begin/End if already declared Start/Stop
-  *	get/set, add/remove, create/destroy, start/stop, insert/remove, increment/decrement, begin/end, first/last, up/down, min/max, next/previous, old/new, open/close, show/hide, suspend/resume, initialize/shutdown
+* The bigger the scope of the name the more descriptive it should be.
+  * Using common letters for small loops is ok (I, j, k, …)
+* Do not use cryptic names or abbreviations
+* Use correct American English spelling
+* Make names pronounceable
+* Use names that are searchable
+* Use complement names and be consistent with their usage
+  * If you use Start/Stop in your code then use those names throughout, do not use Begin/End if already declared Start/Stop
+  * get/set, add/remove, create/destroy, start/stop, insert/remove, increment/decrement, begin/end, first/last, up/down, min/max, next/previous, old/new, open/close, show/hide, suspend/resume, initialize/shutdown
 
 ### Variables
-*	Variables should be in the form of a noun
-  *	player, enemy, projectile 
-*	Variable names should use camel case format which is lowercase start and uppercase for each word in the name.
-  *	vertexColor, gameObject, worldPosition
-*	Class member variables should have m_ prefixed to the name. This allows member variables to be distinguished from local variables.
-  *	m_score, m_lives, m_timer
-  *	Public member variables of structs do not require m_
-*	Static member variables should have a s_ prefix
-*	Global member variables should have a g_ prefix
-*	Only one variable should be listed per line/declaration
-  *	int score;
-  *	float speed;
-*	When declaring boolean variables use the term “is” or “has” in front of the name
-  *	isActive, isInitialized
+* Variables should be in the form of a noun
+  * player, enemy, projectile 
+* Variable names should use camel case format which is lowercase start and uppercase for each word in the name.
+  * vertexColor, gameObject, worldPosition
+* Class member variables should have m_ prefixed to the name. This allows member variables to be distinguished from local variables.
+  * m_score, m_lives, m_timer
+  * Public member variables of structs do not require m_
+* Static member variables should have a s_ prefix
+* Global member variables should have a g_ prefix
+* Only one variable should be listed per line/declaration
+  * int score;
+  * float speed;
+* When declaring boolean variables use the term “is” or “has” in front of the name
+  * isActive, isInitialized
 
 ### Functions
 
