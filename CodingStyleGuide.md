@@ -1,5 +1,5 @@
 <center> <h1>Neumont College Game Studios</h1> </center>
-<center> <h1>C++ Coding Style Guideline</h1> </center>
+<center> <h1>C++ Coding Style Guide</h1> </center>
 
 These coding guidelines focus on the C++- language and act as a general guide for other coding languages that are used at the studio.
 
