@@ -1,167 +1,792 @@
-<center> <h1>Neumont College Game Studios</h1> </center>
-<center> <h1>C++ Coding Style Guide</h1> </center>
+# Neumont Game Studios
 
-These coding guidelines focus on the C++- language and act as a general guide for other coding languages that are used at the studio.
+# C++ Coding Style Guide
 
-## Introduction
+These coding guidelines focus on modern C++ and serve as a general reference for software development within Neumont Game Studios. The purpose of this document is not to enforce arbitrary rules, but to encourage consistency, readability, and maintainability across all projects.
 
-The purpose of this style guide is to unify the formatting and style of all projects within the game studio. A common style is beneficial because it helps team members to read code that is common and retain a concise format throughout all projects. Many software companies enforce a coding standard that must be adhered to and getting exposure to a style guide helps students to be familiar with one.
-Some of style choices made are well motivated and common to many companies while other choices are arbitrary. One style may not have an advantage over another but a choice was made to retain a consistent style. Some items may not be covered in this style guide and if so feel free to use whatever style you are accustomed to. The point of this document is not to have a coding war about the standards but to choose a direction and follow it. If there is something you would like to add or revise, please discuss it.
+---
+
+# Introduction
+
+A coding standard helps developers work together more effectively by making code easier to read, understand, and maintain. Most professional software studios follow established coding standards, and exposure to these practices prepares students for industry expectations.
+
+While many style choices are subjective, consistency is more important than the specific choice itself. This guide establishes a common direction for projects developed within the studio.
+
+When in doubt, prioritize clarity over cleverness.
+
+---
+
+# General Principles
+
+## Clarity is King
+
+Code is read far more often than it is written. Write code that is easy for another developer to understand.
+
+Good:
+
+```cpp
+playerHealth -= damage;
+```
+
+Bad:
+
+```cpp
+hp -= dmg;
+```
+
+unless the shorter names are widely understood within the context.
+
+## Prefer Simplicity
+
+Write the simplest solution that solves the problem.
+
+Avoid:
+
+* Unnecessary abstraction
+* Premature optimization
+* Clever but difficult-to-read code
+
+## Consistency Matters
+
+Follow existing naming and design conventions throughout a project.
+
+If a project uses:
+
+```cpp
+StartGame();
+StopGame();
+```
+
+do not introduce:
+
+```cpp
+BeginGame();
+EndGame();
+```
+
+for the same concepts.
+
+---
+
+# Naming
+
+Names should be clear, descriptive, searchable, and pronounceable.
+
+## General Rules
+
+* Use correct American English spelling.
+* Avoid cryptic abbreviations.
+* Use descriptive names for large-scope objects.
+* Single-letter names are acceptable only for small loop counters.
+* Use complementary naming pairs consistently:
+
+  * Start / Stop
+  * Create / Destroy
+  * Add / Remove
+  * Show / Hide
+  * Open / Close
+  * Begin / End
+  * Enable / Disable
+
+---
+
+# Variables
+
+Variables should be nouns or noun phrases.
+
+## Local Variables
+
+Use camelCase.
+
+```cpp
+int score;
+float movementSpeed;
+Vector2 worldPosition;
+```
+
+## Member Variables
+
+Prefix member variables with `m_`.
+
+```cpp
+class Player
+{
+private:
+    int m_health;
+    float m_speed;
+};
+```
+
+## Static Member Variables
+
+Prefix static member variables with `s_`.
+
+```cpp
+static int s_instanceCount;
+```
+
+## Global Variables
+
+Avoid global variables whenever possible.
+
+If shared data is required, prefer namespaces over global namespace variables.
+
+```cpp
+namespace Game
+{
+    extern PlayerManager playerManager;
+}
+```
+
+## Boolean Variables
+
+Boolean variables should read naturally in conditional statements.
+
+```cpp
+bool isActive;
+bool hasWeapon;
+bool canJump;
+bool shouldRespawn;
+bool wasDestroyed;
+```
+
+Examples:
+
+```cpp
+if (canJump)
+{
+}
+
+if (hasWeapon)
+{
+}
+```
+
+---
+
+# Functions
+
+Functions should perform one task and do it well.
 
 ## Naming
 
-The naming of functions, classes and variables is very important. The name should be clear and concise. Code is reading/writing is general done on a 10:1 ratio. So, making the code easy to read is vital.
+Functions should use PascalCase and be written as verbs or verb phrases.
 
-* The bigger the scope of the name the more descriptive it should be.
-  * Using common letters for small loops is ok (I, j, k, …)
-* Do not use cryptic names or abbreviations
-* Use correct American English spelling
-* Make names pronounceable
-* Use names that are searchable
-* Use complement names and be consistent with their usage
-  * If you use Start/Stop in your code then use those names throughout, do not use Begin/End if already declared Start/Stop
-  * get/set, add/remove, create/destroy, start/stop, insert/remove, increment/decrement, begin/end, first/last, up/down, min/max, next/previous, old/new, open/close, show/hide, suspend/resume, initialize/shutdown
+```cpp
+GetHealth();
+SetPosition();
+CreateEnemy();
+LoadTexture();
+```
 
-### Variables
-* Variables should be in the form of a noun
-  * player, enemy, projectile 
-* Variable names should use camel case format which is lowercase start and uppercase for each word in the name.
-  * vertexColor, gameObject, worldPosition
-* Class member variables should have m_ prefixed to the name. This allows member variables to be distinguished from local variables.
-  * m_score, m_lives, m_timer
-  * Public member variables of structs do not require m_
-* Static member variables should have a s_ prefix
-* Global member variables should have a g_ prefix
-* Only one variable should be listed per line/declaration
-  * int score;
-  * float speed;
-* When declaring boolean variables use the term “is” or “has” in front of the name
-  * isActive, isInitialized
+Avoid vague names such as:
 
-### Functions
+```cpp
+Process();
+Handle();
+Manage();
+DoStuff();
+```
 
-* Functions should be in the form of verb or verb/noun
-* Function names should use pascal case which is uppercase start and uppercase for each word in the name.
-  * GetScore, SetPlayerName
-* Avoid verbs that are ambiguous (Handle, Process,…)
-* Functions that return a Boolean value should ask a true/false question
-  * bool IsVisible()
+## Boolean Functions
 
-### Classes/Structs
-* Class/Struct names should be in the form of a noun
-* Class/Struct names should use pascal case which is uppercase start and uppercase for each word in the name.
-  * GamePlayer, AudioManager, EnemyWeapon, VertexFormat
+Boolean-returning functions should ask a question.
 
-### Enum
-* Enum should be prefixed with an ‘e’
-  * enum eState
-  * enum eVertexFormat
-* Values declared in the enum should be all capitals with an underscore between names
-  * ACTIVE, LASER_WEAPON
+```cpp
+bool IsAlive() const;
+bool HasAmmo() const;
+bool CanAttack() const;
+```
 
-### Macros
-* Macros should be all capitals with an underscore between names
-  * #define PACK_RGB(r, g, b)
+## Function Parameters
 
-## Comments
-Comments are important to help the reader understand the code if it is complex or needs extra information to use. Comments tend to diverge from the original code because the comment is not updated when the code is changed. Therefore, it is vital that the code should be self-explanatory.
-* Use // for descriptive comments and /* to disable code
-* Do not leave old disabled code in the source
-  * Code that is disabled makes it harder to remember why it was commented out in the first place
-  * With source control disabled code can be found in the history of the file
-* Write self-documenting code
-  * playerHealth = playerHealth – damage;
-* Do not comment bad code. Take the time to correct the code
-  * // this is totally messed up but it works most of the time - fix me 
+Order parameters as:
 
-## Structs / Class
-Use structs for passive objects that carry data. Do not have structs that contain function methods.
+1. Inputs
+2. Outputs
 
-## Variables
+Example:
 
-* Avoid global variables
-* Avoid variables in the global namespace
-  * Use a namespace to contain a variable
-  * Do not pollute the global namespace with variables
+```cpp
+bool IntersectRay(
+    const Ray& ray,
+    const Collider& collider,
+    HitInfo& hitInfo);
+```
 
-## Functions
-Functions should be small and do only one thing. If the function is long or does multiple actions, break the function into smaller functions. Keep them short and simple.
+Avoid long parameter lists. If several parameters represent related data, consider grouping them into a struct or class.
 
-* Avoid functions in the global namespace
-  * Use a namespace to encapsulate a function
-  * Do not pollute the global namespace with functions
-* The order of parameters to a function should be: inputs then outputs
-  * Some parameters may be considered as both input and output
-  * You may have to bend this rule
-* Avoid have long parameter lists
-  * Consider grouping the data in a struct if there is multiple related data
-* Pass large data to a function as a reference unless a null pointer is possible
-  * void DamageGameObject(GameObject& gameObject, Weapon& weapon);
-* Strive to use the const keyword when applicable
-  * If a method does not modify the object use const
-    * float GetHealth() const { return m_health; }
-  * If a function parameter is not altered in the function use const
-    * bool IsPlayerAlive(const Player& player) { return player.GetHealth() <= 0.0f; }
+---
 
-## Spacing/Indentation/Bracing
+# Classes and Structs
 
-### Spacing
+## Classes
 
-* Put a space between if, for, while and the parenthesis that follows.
-  * If (x >= 5.0f)
-  * for (int I = I < 5; i++)
-* Do not put a space between the function name and the parenthesis in a function call.
-  * void CreateEnemy(); 
-* Do not put spaces inside parenthesis.
-* Put spaces after commas, do not put spaces before commas.
-  * GetGameObjectType(objects, eType.ENEMY, true);
-* Place the pointer and reference symbol with the type and not the variable
-  * GamePlayer* player;
-  * bool IsEnemyInRange(const Enemy& enemy, float distance);
+Use classes when encapsulating behavior and state.
 
-### Indentation
+Class names should use PascalCase.
 
-* Use tabs not spaces
-  * Use tabs that are equal to 4 spaces
+```cpp
+class AudioManager;
+class EnemySpawner;
+class PhysicsWorld;
+```
 
-### Bracing
-Each company and developer has their own style when it comes to the placing of braces. The objective of this guide is to have a consistent style that will be familiar to all readers.
-* All braces should exist on their own line
-  * If (isActive) </br>
-{ </br>
-	    return; </br>
-} </br>
+## Structs
 
+Use structs primarily for passive data objects.
 
-## .h / .cpp Files
-### .h
-Header files can become tricky and result in a tangled mess of errors resulting from .h files with circular dependencies. Following the guidelines below will help manage the header dependencies.
+```cpp
+struct Vertex
+{
+    Vector3 position;
+    Vector2 uv;
+};
+```
 
-* Use #pragma once at the top of the file, do not use include guard #ifndef/#define/#endif
-  * All modern compilers support #pragma once 
-* Use forward declarations when possible
-  * Avoid using #include in a header file that is not required
-* Avoid function implementations in header files, prefer headers with declarations only
-* Avoid having multiple classes in the same header unless they are nested in another class or short classes
-* Include third party headers with #include <name>
-  * Third party header locations should be provided through the build script
+Small helper functions are acceptable, but structs should primarily represent data rather than behavior.
 
-### .cpp
-Classes should not be split across multiple .cpp files.
+---
 
-## Conclusion
-It is the intent of this document to come up with a good standard that is followed by all students of the game programming degree. The desire is to have the students write clean, clear and well formatted code.
+# Enumerations
 
-**CLARITY IS KING!**
+Use scoped enumerations (`enum class`).
 
-* Do not try to write complex code, simplicity is best
-* The point of good code is to be clear not clever
+Enumeration names and values should use PascalCase.
 
-Much of this document was created from personal experience and from the references listed below. It is the hope that this guide follows many of the same standards that are used in the industry today.
+```cpp
+enum class WeaponType
+{
+    Laser,
+    Rocket,
+    Plasma
+};
+```
 
-https://google.github.io/styleguide/cppguide.html
-https://docs.unrealengine.com/latest/INT/Programming/Development/CodingStandard/
-http://docs.cryengine.com/pages/viewpage.action?pageId=25530454
-http://fd.fabiensanglard.net/doom3/CodeStyleConventions.pdf
-https://github.com/niklasfrykholm/blog/blob/master/reference/coding-style.md
+Usage:
 
+```cpp
+WeaponType weapon = WeaponType::Laser;
+```
+
+Scoped enumerations improve type safety and prevent namespace pollution.
+
+---
+
+# Constants
+
+Prefer `constexpr` whenever possible.
+
+```cpp
+constexpr float MaxSpeed = 250.0f;
+constexpr int MaxPlayers = 4;
+```
+
+Use PascalCase for constant names.
+
+Avoid macros for constants.
+
+---
+
+# References and Pointers
+
+Understanding when to use references and pointers is essential for writing clear and maintainable C++ code.
+
+## General Rule
+
+Prefer references over pointers whenever a valid object is required.
+
+A reference indicates that an object must exist and cannot be null.
+
+```cpp
+void DamagePlayer(Player& player)
+{
+    player.TakeDamage(10);
+}
+```
+
+Use pointers when an object may not exist.
+
+```cpp
+void SetTarget(Enemy* target)
+{
+    m_target = target;
+}
+```
+
+A null pointer represents the absence of an object.
+
+```cpp
+if (m_target != nullptr)
+{
+    m_target->Attack();
+}
+```
+
+## Function Parameters
+
+### Required Object
+
+Use a reference.
+
+```cpp
+void Render(Sprite& sprite);
+```
+
+Use a const reference when modification is not required.
+
+```cpp
+void Render(const Sprite& sprite);
+```
+
+### Optional Object
+
+Use a pointer.
+
+```cpp
+void SetOwner(Player* owner);
+```
+
+The pointer may be nullptr to indicate no owner.
+
+## Passing Large Objects
+
+Pass large objects as const references.
+
+Good:
+
+```cpp
+void Render(const Mesh& mesh);
+void LoadLevel(const LevelData& levelData);
+```
+
+Avoid:
+
+```cpp
+void Render(Mesh mesh);
+```
+
+which creates an unnecessary copy.
+
+## Output Parameters
+
+Output parameters should generally be references.
+
+```cpp
+bool Raycast(
+    const Ray& ray,
+    HitInfo& hitInfo);
+```
+
+## Reference Members
+
+Avoid storing references as class members.
+
+Bad:
+
+```cpp
+class Player
+{
+private:
+    Renderer& m_renderer;
+};
+```
+
+References cannot be reseated and often complicate lifetime management.
+
+Prefer pointers for non-owning member relationships.
+
+```cpp
+class Player
+{
+private:
+    Renderer* m_renderer;
+};
+```
+
+---
+
+# Memory Management
+
+Prefer modern memory management techniques.
+
+## Ownership
+
+Use `std::unique_ptr` for exclusive ownership.
+
+```cpp
+std::unique_ptr<Player>
+```
+
+Example:
+
+```cpp
+class Scene
+{
+private:
+    std::vector<std::unique_ptr<GameObject>> m_objects;
+};
+```
+
+Use `std::shared_ptr` only when ownership must be shared.
+
+```cpp
+std::shared_ptr<Texture>
+```
+
+Avoid using shared ownership by default.
+
+## Raw Pointers
+
+Raw pointers should generally represent non-owning references to objects.
+
+```cpp
+Enemy* m_target;
+```
+
+The object is owned elsewhere.
+
+---
+
+# Standard Library
+
+Prefer standard library containers and utilities before creating custom solutions.
+
+Commonly used types:
+
+```cpp
+std::vector
+std::array
+std::unordered_map
+std::string
+std::optional
+```
+
+Do not reinvent functionality already provided by the standard library unless there is a compelling reason.
+
+---
+
+# Modern C++ Guidelines
+
+## Use nullptr
+
+Good:
+
+```cpp
+Player* player = nullptr;
+```
+
+Bad:
+
+```cpp
+Player* player = NULL;
+```
+
+---
+
+## Prefer using Over typedef
+
+Good:
+
+```cpp
+using EntityId = uint32_t;
+```
+
+Bad:
+
+```cpp
+typedef uint32_t EntityId;
+```
+
+---
+
+## Use Range-Based Loops
+
+Good:
+
+```cpp
+for (auto& enemy : enemies)
+{
+    enemy.Update();
+}
+```
+
+---
+
+## Use auto When the Type Is Obvious
+
+Good:
+
+```cpp
+auto player = std::make_unique<Player>();
+```
+
+Avoid:
+
+```cpp
+auto value = SomeComplicatedFunction();
+```
+
+when the type is unclear.
+
+---
+
+# Const Correctness
+
+Use `const` whenever possible.
+
+## Member Functions
+
+If a member function does not modify the object, mark it const.
+
+```cpp
+float GetHealth() const;
+```
+
+## Parameters
+
+Pass read-only objects as const references.
+
+```cpp
+void Render(const Camera& camera);
+```
+
+Const correctness communicates intent and helps prevent bugs.
+
+---
+
+# Comments
+
+Comments should explain why, not what.
+
+Good:
+
+```cpp
+// Enemy remains invulnerable for a brief period
+// after spawning to prevent unfair deaths.
+```
+
+Avoid:
+
+```cpp
+// Increase score by 10.
+score += 10;
+```
+
+The code already explains what it does.
+
+## Guidelines
+
+* Use `//` for comments.
+* Remove obsolete comments.
+* Do not leave large blocks of disabled code.
+* Use source control history instead.
+
+---
+
+# Spacing and Formatting
+
+## Spacing
+
+Place a space after control statements.
+
+```cpp
+if (isAlive)
+```
+
+```cpp
+for (int i = 0; i < 10; i++)
+```
+
+Do not place spaces inside parentheses.
+
+```cpp
+MovePlayer(player, speed);
+```
+
+Place spaces after commas.
+
+```cpp
+SpawnEnemy(position, rotation, speed);
+```
+
+## Pointers and References
+
+Associate pointers and references with the type.
+
+```cpp
+Player* player;
+const Enemy& enemy;
+```
+
+Not:
+
+```cpp
+Player *player;
+Enemy &enemy;
+```
+
+---
+
+# Indentation
+
+Use tabs.
+
+A tab should be displayed as four spaces.
+
+---
+
+# Braces
+
+Opening braces should appear on their own line.
+
+```cpp
+if (isActive)
+{
+    Update();
+}
+```
+
+```cpp
+class Player
+{
+public:
+    void Update();
+};
+```
+
+Always use braces, even for single-line conditionals.
+
+Good:
+
+```cpp
+if (isAlive)
+{
+    Respawn();
+}
+```
+
+Avoid:
+
+```cpp
+if (isAlive)
+    Respawn();
+```
+
+---
+
+# File Organization
+
+## Header Files (.h)
+
+* Use `#pragma once`
+* Prefer forward declarations where possible
+* Minimize includes
+* One major class per header
+* Avoid function implementations in headers unless required
+
+Example:
+
+```cpp
+#pragma once
+
+class Renderer;
+
+class Player
+{
+};
+```
+
+## Source Files (.cpp)
+
+Classes should not be split across multiple source files.
+
+Recommended order:
+
+1. Includes
+2. Constants
+3. Enumerations
+4. Structs
+5. Class implementation
+
+---
+
+# Class Layout
+
+Recommended class organization:
+
+```cpp
+class Player
+{
+public:
+    Player();
+
+    void Update();
+    void Render();
+
+protected:
+
+private:
+    void ProcessInput();
+
+private:
+    int m_health;
+    float m_speed;
+};
+```
+
+Group related functionality together and keep public interfaces concise.
+
+---
+
+# Namespaces
+
+Avoid placing functions and variables directly into the global namespace.
+
+Good:
+
+```cpp
+namespace Physics
+{
+    void Simulate();
+}
+```
+
+Bad:
+
+```cpp
+void Simulate();
+```
+
+Namespaces help organize code and reduce naming conflicts.
+
+---
+
+# AI-Assisted Development
+
+AI tools can be useful development assistants, but they do not replace understanding.
+
+Students are responsible for all code submitted regardless of whether it was written by:
+
+* The student
+* Another developer
+* An AI tool
+
+If you cannot explain how a piece of code works, you should not submit it.
+
+AI-generated code should be reviewed, understood, tested, and integrated thoughtfully.
+
+---
+
+# Conclusion
+
+The goal of this guide is not to create perfect code. The goal is to create code that is easy to read, easy to maintain, and easy to extend.
+
+**CLARITY IS KING**
+
+* Write code for humans first.
+* Prefer simple solutions.
+* Favor readability over cleverness.
+* Consistency is more important than personal preference.
+
+The best code is not the most impressive code—it is the code that another developer can understand six months later.
