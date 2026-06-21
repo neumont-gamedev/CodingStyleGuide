@@ -1,4 +1,4 @@
-# Neumont Game Studios
+# Neumont Game
 
 # C++ Coding Style Guide
 
